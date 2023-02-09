@@ -1,0 +1,49 @@
+{
+  "name": "json_ipc",
+  "version": "1.0.0",
+  "description": "JSON based ipc module",
+  "main": "build/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "npx nodemon",
+    "postbuild": "ef-tspm",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js"
+  },
+  "keywords": [
+    "JSON",
+    "ipc",
+    "node",
+    "js",
+    "nodejs",
+    "ts"
+  ],
+  "author": "Mohamad Khawam",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^4.1.2",
+    "typescript": "^5.0.0-dev.20230208"
+  },
+  "paths": {
+    "@moduletypes/*": [
+      "src/moduletypes/*"
+    ],
+    "@utils/*": [
+      "src/utils/*"
+    ],
+    "@modules/*": [
+      "src/modules/*"
+    ],
+    "@outs/*": [
+      "src/outs/*"
+    ]
+  },
+  "dependencies": {
+    "@ef-carbon/tspm": "^2.2.5",
+    "colors": "^1.4.0",
+    "delay": "^5.0.0",
+    "module-alias": "^2.2.2"
+  }
+}

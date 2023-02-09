@@ -1,0 +1,1 @@
+export type log_type = 'log'|'warn' |'debug'|'error'

@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es6",                           
+    "lib": ["es6"],                                      
+    "module": "commonjs",
+    "rootDir": "src",                                    
+    "resolveJsonModule": true,                             
+    "allowJs": true,                                     
+    "outDir": "build",                                     
+    "esModuleInterop": true,                            
+    "strict": true,                                     
+    "noImplicitAny": true,                           
+    "skipLibCheck": true,    
+    "baseUrl": ".",                         
+    "paths": {
+      "@moduletypes/*": ["src/moduletypes/*"],
+      "@utils/*" :["src/utils/*"],
+      "@modules/*" :["src/modules/*"],
+      "@outs/*" :["src/outs/*"]
+    },
+    "moduleResolution": "node",
+  },
+  "include": ["src/**/*", "src/*"]
+  
+
+}
