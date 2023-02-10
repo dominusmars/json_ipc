@@ -22,12 +22,13 @@ var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _JsonIpc_routes, _JsonIpc_debug;
+var _JsonIpc_routes, _JsonIpc_debug, _JsonIpc_ready;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JsonIpc = void 0;
 const message_1 = require("./message");
 const output_1 = require("./output");
 const events_1 = __importDefault(require("events"));
+const delay_1 = __importDefault(require("delay"));
 function invalidRequest(error) {
     return JSON.stringify({
         'body': error,
@@ -39,8 +40,10 @@ class JsonIpc extends events_1.default {
         super();
         _JsonIpc_routes.set(this, void 0);
         _JsonIpc_debug.set(this, void 0);
+        _JsonIpc_ready.set(this, void 0);
         __classPrivateFieldSet(this, _JsonIpc_routes, new Map(), "f");
         __classPrivateFieldSet(this, _JsonIpc_debug, false, "f");
+        __classPrivateFieldSet(this, _JsonIpc_ready, false, "f");
         if (!process || process == undefined) {
             throw new Error("Not a Node Process ");
         }
@@ -48,6 +51,9 @@ class JsonIpc extends events_1.default {
             throw new Error("Ipc not connected");
         }
         process.on('message', (m) => __awaiter(this, void 0, void 0, function* () {
+            while (!__classPrivateFieldGet(this, _JsonIpc_ready, "f")) {
+                yield (0, delay_1.default)(100);
+            }
             var then = Date.now();
             if (!process || process == undefined) {
                 throw new Error("Not a Node Process ");
@@ -86,6 +92,9 @@ class JsonIpc extends events_1.default {
         this.set('get', 'endpoints', (res, req) => {
             req(this.api(), 200);
         });
+    }
+    listen() {
+        __classPrivateFieldSet(this, _JsonIpc_ready, true, "f");
     }
     response(m, ms, body, status) {
         if (!process || process == undefined) {
@@ -166,4 +175,4 @@ class JsonIpc extends events_1.default {
     }
 }
 exports.JsonIpc = JsonIpc;
-_JsonIpc_routes = new WeakMap(), _JsonIpc_debug = new WeakMap();
+_JsonIpc_routes = new WeakMap(), _JsonIpc_debug = new WeakMap(), _JsonIpc_ready = new WeakMap();

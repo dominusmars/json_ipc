@@ -34,7 +34,6 @@ if (process.argv[2] == 'child') {
         res('hello word');
     }));
     application.debugging();
-    console.log(application.endpoints());
 } else {
     var child = fork(__filename, ['child'], {
         stdio: [

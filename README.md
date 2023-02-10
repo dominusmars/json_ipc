@@ -12,13 +12,14 @@ A simple IPC (Inter-Process Communication) system for Node.js using JSON as a me
 *Lightweight and easy to use
 #Installation
 
-###To install JsonIpc, run the following command:
+### To install JsonIpc, run the following command:
 
 ```
 npm install json-ipc
 ```
 
-#Usage
+# Usage
+
 A simple example of how to use JsonIpc:
 
 ```
@@ -26,8 +27,8 @@ import { JsonIpc } from 'json-ipc';
 
 const ipc = new JsonIpc();
 
-ipc.get('/hello', (message, respond) => {
-respond(`Hello, ${message.body}`, 200);
+ipc.get('/hello', (res, res) => {
+res(`Hello, ${res.body}`, 200);
 });
 
 ipc.listen();
@@ -55,44 +56,58 @@ ipc.debugging();
 
 This method creates a new GET route.
 
-````ipc.get('/hello', (message, respond) => {
-respond(`Hello, ${message.body}`, 200);
-});```
+```
+ipc.get('/hello', (res, res) => {
+    res(`Hello, ${res.body}`, 200);
+});
+```
+
 ## post(endpoint: string, func: (message: Request, respond: (body?: any, status?: status) => void) => void)
+
 This method creates a new POST route.
 
-```ipc.post('/hello', (message, respond) => {
-respond(`Hello, ${message.body}`, 200);
-});```
+```
+ipc.post('/hello', (res, res) => {
+    res(`Hello, ${res.body}`, 200);
+});
+```
+
 ## del(endpoint: string, func: (message: Request, respond: (body?: any, status?: status) => void) => void)
+
 This method creates a new DELETE route.
 
-```ipc.del('/hello', (message, respond) => {
-respond(`Hello, ${message.body}`, 200);
-});```
+```
+ipc.del('/hello', (res, res) => {
+res(`Hello, ${res.body}`, 200);
+});
+```
+
 ## set(method: string, endpoint: string, func: (message: Request, respond: (body?: any, status?: status) => void) => void)
+
 This method creates a new route with the specified method.
 
-```ipc.set('GET', '/hello', (message, respond) => {
-respond(`Hello, ${message.body}`, 200);
-});```
+```
+ipc.set('GET', '/hello', (res, res) => {
+res(`Hello, ${res.body}`, 200);
+});
+```
 
 ## endpoints(): string[]
+
 This method returns a list of all defined endpoints.
 
-````
+```
 
 console.log(ipc.endpoints());
 
 ```
 
 ## api(): { [key: string]: string[] }
+
 This method returns all the defined methods and endpoints
 
 ```
 
 console.log(ipc.api())
-
-```
 
 ```
